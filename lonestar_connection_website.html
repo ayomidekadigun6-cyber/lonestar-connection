@@ -1,0 +1,839 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lonestar Connection Ltd</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0b3d5c;
+      color: white;
+      padding: 18px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .logo span {
+      color: #f4b942;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #f4b942;
+    }
+
+    .menu-btn {
+      display: none;
+      background: transparent;
+      border: 1px solid white;
+      color: white;
+      padding: 8px 12px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .hero {
+      background: linear-gradient(
+        135deg,
+        #0b3d5c,
+        #147e8c
+      );
+      color: white;
+      padding: 100px 6%;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 58px);
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: auto;
+      color: #e0f0f5;
+      font-size: 18px;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 13px 25px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: #12a6a6;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #087e86;
+    }
+
+    .btn-light {
+      background: white;
+      color: #0b3d5c;
+      margin-left: 10px;
+    }
+
+    section {
+      padding: 75px 6%;
+      scroll-margin-top: 90px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-title h2 {
+      color: #0b3d5c;
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: #667781;
+    }
+
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .about-box {
+      background: #0b3d5c;
+      color: white;
+      border-radius: 18px;
+      padding: 45px;
+    }
+
+    .about-box h2 {
+      font-size: 35px;
+      margin-bottom: 15px;
+    }
+
+    .about-text h2 {
+      color: #0b3d5c;
+      margin-bottom: 15px;
+    }
+
+    .about-text p {
+      margin-bottom: 20px;
+    }
+
+    .check-list {
+      list-style: none;
+    }
+
+    .check-list li {
+      margin: 10px 0;
+    }
+
+    .check-list li::before {
+      content: "✓";
+      color: #12a6a6;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    .services {
+      background: white;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .service-card {
+      padding: 30px;
+      border: 1px solid #e1e9ee;
+      border-radius: 16px;
+      background: white;
+      transition: 0.3s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .service-icon {
+      font-size: 35px;
+      margin-bottom: 15px;
+    }
+
+    .service-card h3 {
+      color: #0b3d5c;
+      margin-bottom: 10px;
+    }
+
+    .service-card p {
+      color: #667781;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      text-align: center;
+    }
+
+    .process-card {
+      padding: 25px;
+    }
+
+    .process-number {
+      background: #12a6a6;
+      color: white;
+      width: 50px;
+      height: 50px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      margin: auto;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .process-card h3 {
+      color: #0b3d5c;
+      margin: 15px 0;
+    }
+
+    .cta {
+      background: #12a6a6;
+      color: white;
+      text-align: center;
+    }
+
+    .cta h2 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .contact {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 35px;
+    }
+
+    .contact-info,
+    .contact-form {
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+    }
+
+    .contact-info h3,
+    .contact-form h3 {
+      color: #0b3d5c;
+      margin-bottom: 20px;
+    }
+
+    .contact-item {
+      margin: 20px 0;
+    }
+
+    .contact-item strong {
+      display: block;
+      color: #0b3d5c;
+    }
+
+    .contact-item span {
+      color: #667781;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-weight: bold;
+      color: #0b3d5c;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #d7e2e8;
+      border-radius: 8px;
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: 2px solid #12a6a6;
+      border-color: transparent;
+    }
+
+    .form-message {
+      color: #087e86;
+      margin-top: 12px;
+      font-weight: bold;
+    }
+
+    footer {
+      background: #10202b;
+      color: #c5d6de;
+      padding: 45px 6% 20px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 0.8fr;
+      gap: 35px;
+    }
+
+    footer h3,
+    footer h4 {
+      color: white;
+      margin-bottom: 15px;
+    }
+
+    footer a {
+      display: block;
+      color: #c5d6de;
+      text-decoration: none;
+      margin: 8px 0;
+    }
+
+    footer a:hover {
+      color: #f4b942;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #31424d;
+      margin-top: 30px;
+      padding-top: 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .back-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 45px;
+      height: 45px;
+      background: #12a6a6;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 20px;
+      display: none;
+    }
+
+    .back-top.show {
+      display: block;
+    }
+
+    @media (max-width: 850px) {
+      .menu-btn {
+        display: block;
+      }
+
+      nav {
+        display: none;
+        position: absolute;
+        top: 75px;
+        left: 0;
+        right: 0;
+        background: #0b3d5c;
+        padding: 20px 6%;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      nav.open {
+        display: flex;
+      }
+
+      .about,
+      .contact {
+        grid-template-columns: 1fr;
+      }
+
+      .service-grid,
+      .process-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 70px 6%;
+      }
+
+      .btn-light {
+        margin-left: 0;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .about-box,
+      .contact-info,
+      .contact-form {
+        padding: 22px;
+      }
+
+      section {
+        padding: 55px 6%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">
+      Lone<span>star</span> Connection Ltd
+    </div>
+
+    <button class="menu-btn" id="menuBtn">
+      ☰
+    </button>
+
+    <nav id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#process">How We Work</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="hero" id="home">
+      <h1>Building Connections.<br>Creating Possibilities.</h1>
+
+      <p>
+        Welcome to Lonestar Connection Ltd.
+        We connect people, businesses, and opportunities
+        through dependable service and practical solutions.
+      </p>
+
+      <a href="#services" class="btn btn-primary">
+        Explore Our Services
+      </a>
+
+      <a href="#contact" class="btn btn-light">
+        Contact Us
+      </a>
+    </section>
+
+    <section id="about">
+      <div class="about">
+
+        <div class="about-box">
+          <h2>About Our Company</h2>
+          <p>
+            A professional company focused on building
+            meaningful connections and delivering
+            quality services to clients.
+          </p>
+        </div>
+
+        <div class="about-text">
+          <h2>Who We Are</h2>
+
+          <p>
+            Lonestar Connection Ltd is committed to
+            providing dependable service, professional
+            communication, and solutions designed
+            around client needs.
+          </p>
+
+          <ul class="check-list">
+            <li>Professional communication</li>
+            <li>Reliable service delivery</li>
+            <li>Client-focused solutions</li>
+            <li>Long-term relationships</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="services" id="services">
+
+      <div class="section-title">
+        <h2>Our Services</h2>
+        <p>
+          Explore some of the services we can provide.
+          Replace these with your actual company services.
+        </p>
+      </div>
+
+      <div class="service-grid">
+
+        <div class="service-card">
+          <div class="service-icon">🔗</div>
+          <h3>Business Connections</h3>
+          <p>
+            Helping individuals and businesses
+            discover useful connections and opportunities.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">💼</div>
+          <h3>Professional Support</h3>
+          <p>
+            Organized and client-focused support
+            for different business needs.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">📈</div>
+          <h3>Growth Solutions</h3>
+          <p>
+            Exploring practical ways to improve
+            business operations and opportunities.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🤝</div>
+          <h3>Partnership Services</h3>
+          <p>
+            Supporting productive relationships
+            between organizations and individuals.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🧭</div>
+          <h3>Consultation</h3>
+          <p>
+            Discuss your needs and explore
+            possible next steps.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">⭐</div>
+          <h3>Customer Care</h3>
+          <p>
+            Responsive communication and
+            attention to customer needs.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="process">
+
+      <div class="section-title">
+        <h2>How We Work</h2>
+        <p>
+          Our simple approach to serving clients.
+        </p>
+      </div>
+
+      <div class="process-grid">
+
+        <div class="process-card">
+          <div class="process-number">1</div>
+          <h3>Tell Us Your Needs</h3>
+          <p>
+            Share your request or business challenge
+            with our team.
+          </p>
+        </div>
+
+        <div class="process-card">
+          <div class="process-number">2</div>
+          <h3>Discuss Options</h3>
+          <p>
+            We review your needs and discuss
+            suitable solutions.
+          </p>
+        </div>
+
+        <div class="process-card">
+          <div class="process-number">3</div>
+          <h3>Move Forward</h3>
+          <p>
+            Agree on the next steps and
+            begin working toward your goal.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="cta">
+      <h2>Ready to Connect With Us?</h2>
+
+      <p>
+        Let's discuss your needs and explore
+        the possibilities together.
+      </p>
+
+      <a href="#contact" class="btn btn-light">
+        Get in Touch
+      </a>
+    </section>
+
+    <section id="contact">
+
+      <div class="section-title">
+        <h2>Contact Us</h2>
+        <p>
+          Replace the sample details with your
+          company's real information.
+        </p>
+      </div>
+
+      <div class="contact">
+
+        <div class="contact-info">
+          <h3>Company Information</h3>
+
+          <div class="contact-item">
+            <strong>📍 Office Address</strong>
+            <span>Add your real office address</span>
+          </div>
+
+          <div class="contact-item">
+            <strong>📞 Phone Number</strong>
+            <span>+234 800 000 0000</span>
+          </div>
+
+          <div class="contact-item">
+            <strong>✉️ Email Address</strong>
+            <span>info@yourcompany.com</span>
+          </div>
+
+          <div class="contact-item">
+            <strong>🕒 Opening Hours</strong>
+            <span>Monday – Saturday, 8 AM – 6 PM</span>
+          </div>
+        </div>
+
+        <form class="contact-form" id="contactForm">
+
+          <h3>Send an Enquiry</h3>
+
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input
+              type="text"
+              id="name"
+              placeholder="Enter your full name"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="Enter your email"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="service">Service Needed</label>
+
+            <select id="service" required>
+              <option value="">Select a service</option>
+              <option>Business Connections</option>
+              <option>Professional Support</option>
+              <option>Consultation</option>
+              <option>Partnership</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Your Message</label>
+
+            <textarea
+              id="message"
+              placeholder="Write your message here"
+              required
+            ></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary">
+            Submit Enquiry
+          </button>
+
+          <div class="form-message" id="formMessage"></div>
+
+        </form>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+
+    <div class="footer-grid">
+
+      <div>
+        <h3>Lonestar Connection Ltd</h3>
+        <p>
+          Creating useful connections through
+          dependable service and professional
+          communication.
+        </p>
+      </div>
+
+      <div>
+        <h4>Quick Links</h4>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <div>
+        <h4>Contact</h4>
+        <a href="tel:+2348000000000">
+          +234 800 000 0000
+        </a>
+        <a href="mailto:info@yourcompany.com">
+          info@yourcompany.com
+        </a>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      © <span id="year"></span> Lonestar Connection Ltd.
+      All rights reserved.
+    </div>
+
+  </footer>
+
+  <button class="back-top" id="backTop">
+    ↑
+  </button>
+
+  <script>
+
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+    const backTop = document.getElementById("backTop");
+    const form = document.getElementById("contactForm");
+    const formMessage = document.getElementById("formMessage");
+
+    // Mobile navigation menu
+    menuBtn.addEventListener("click", () => {
+      navLinks.classList.toggle("open");
+
+      menuBtn.textContent =
+        navLinks.classList.contains("open") ? "✕" : "☰";
+    });
+
+    // Close menu after clicking a link
+    document.querySelectorAll("nav a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuBtn.textContent = "☰";
+      });
+    });
+
+    // Show back-to-top button when scrolling
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 400) {
+        backTop.classList.add("show");
+      } else {
+        backTop.classList.remove("show");
+      }
+    });
+
+    // Scroll back to top
+    backTop.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+
+    // Demo contact form
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+
+      formMessage.textContent =
+        "Your form was submitted locally. Connect a backend or email service to receive real enquiries.";
+
+      form.reset();
+    });
+
+    // Automatically display the current year
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+  </script>
+
+</body>
+</html>
